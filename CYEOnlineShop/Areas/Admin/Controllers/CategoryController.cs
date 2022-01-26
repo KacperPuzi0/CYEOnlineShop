@@ -4,8 +4,8 @@ using CYEOnlineShop.Models;
 using CYEOnlineShop.DataAccess;
 using CYEOnlineShop.DataAccess.Repository.IRepository;
 
-namespace CYEOnlineShop.Controllers
-{
+namespace CYEOnlineShop.Controllers;
+[Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

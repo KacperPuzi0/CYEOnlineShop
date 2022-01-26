@@ -16,8 +16,11 @@ namespace CYEOnlineShop.DataAccess.Repository
         {
             _db = db;
             Category = new CategoryRepository(_db);
+            Sex = new SexRepository(_db);
         }
         public ICategoryRepository Category { get; private set; }
+
+        public ISexRepository Sex {get; private set; }
 
         public void Save()
         {

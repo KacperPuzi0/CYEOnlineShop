@@ -9,6 +9,7 @@ namespace CYEOnlineShop.DataAccess.Repository.IRepository
     public interface IUnitOfWork
     {
         ICategoryRepository Category { get; }
+        ISexRepository Sex { get; }
         void Save();
     }
 }
