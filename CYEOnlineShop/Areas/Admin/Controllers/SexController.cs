@@ -1,23 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+
 using CYEOnlineShop.Models;
 using CYEOnlineShop.DataAccess;
 using CYEOnlineShop.DataAccess.Repository.IRepository;
 
 namespace CYEOnlineShop.Controllers;
 [Area("Admin")]
-    public class CategoryController : Controller
+    public class SexController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public CategoryController(IUnitOfWork unitOfWork)
+        public SexController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Category> objCategoryList = _unitOfWork.Category.GetAll();
-            return View(objCategoryList);
+            IEnumerable<Sex> objSexList = _unitOfWork.Sex.GetAll();
+            return View(objSexList);
         }
 
         //GET
@@ -29,15 +30,15 @@ namespace CYEOnlineShop.Controllers;
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Category obj)
+        public IActionResult Create(Sex obj)
         {
             if(!ModelState.IsValid)
             {
                 return View(obj);
             }
-            _unitOfWork.Category.Add(obj);
+            _unitOfWork.Sex.Add(obj);
             _unitOfWork.Save();
-            TempData["success"] = "Category created successfully";
+            TempData["success"] = "Sex created successfully";
             return RedirectToAction("Index");
         }
 
@@ -48,30 +49,29 @@ namespace CYEOnlineShop.Controllers;
             {
                 return NotFound();
             }
-            //var categoryFromDb = _db.Categories.Find(id);
-            var categoryFromDbFirst = _unitOfWork.Category.GetFirstOrDefault(u=>u.Id==id);
-            //var categoryFromDbSingle = _db.Categories.SingleOrDefault(u => u.Id == id);
 
-            if (categoryFromDbFirst == null)
+            var sexFromDbFirst = _unitOfWork.Sex.GetFirstOrDefault(u=>u.Id==id);
+
+            if (sexFromDbFirst == null)
             {
                 return NotFound();
             }
 
-            return View(categoryFromDbFirst);
+            return View(sexFromDbFirst);
         }
 
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Category obj)
+        public IActionResult Edit(Sex obj)
         {
             if (!ModelState.IsValid)
             {
                 return View(obj);
             }
-            _unitOfWork.Category.Update(obj);
+            _unitOfWork.Sex.Update(obj);
             _unitOfWork.Save();
-            TempData["success"] = "Category updated successfully";
+            TempData["success"] = "Sex updated successfully";
             return RedirectToAction("Index");
         }
 
@@ -81,16 +81,15 @@ namespace CYEOnlineShop.Controllers;
             {
                 return NotFound();
             }
-            //var categoryFromDb = _db.Categories.Find(id);
-            var categoryFromDbFirst = _unitOfWork.Category.GetFirstOrDefault(u=>u.Id==id);
-            //var categoryFromDbSingle = _db.Categories.SingleOrDefault(u => u.Id == id);
 
-            if (categoryFromDbFirst == null)
+            var sexFromDbFirst = _unitOfWork.Sex.GetFirstOrDefault(u=>u.Id==id);
+
+            if (sexFromDbFirst == null)
             {
                 return NotFound();
             }
 
-            return View(categoryFromDbFirst);
+            return View(sexFromDbFirst);
         }
 
         //POST
@@ -98,14 +97,15 @@ namespace CYEOnlineShop.Controllers;
         [ValidateAntiForgeryToken]
         public IActionResult DeletePOST(int? id)
         {
-            var obj = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
+            var obj = _unitOfWork.Sex.GetFirstOrDefault(u => u.Id == id);
             if (obj == null)
             {
                 return NotFound();
             }
-            _unitOfWork.Category.Remove(obj);
+            _unitOfWork.Sex.Remove(obj);
             _unitOfWork.Save();
-            TempData["success"] = "Category deleted successfully";
+            TempData["success"] = "Sex deleted successfully";
             return RedirectToAction("Index");
         }
     }
+
