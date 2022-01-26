@@ -10,6 +10,7 @@ namespace CYEOnlineShop.DataAccess.Repository.IRepository
     {
         ICategoryRepository Category { get; }
         ISexRepository Sex { get; }
+        IProductRepository Product { get; }
         void Save();
     }
 }
