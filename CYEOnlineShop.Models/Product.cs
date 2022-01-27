@@ -23,7 +23,8 @@ namespace CYEOnlineShop.Models
         [Required]
         public string Size { get; set; }
 
-        [Required]
+        [Display(Name = "Is Available")]
+        [Range(typeof(bool), "false", "true", ErrorMessage = "Check Available")]
         public bool IsAvailable { get; set; }
 
         [Required]
