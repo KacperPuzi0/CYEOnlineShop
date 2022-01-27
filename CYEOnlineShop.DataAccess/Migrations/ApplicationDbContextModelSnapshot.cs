@@ -45,57 +45,6 @@ namespace CYEOnlineShop.DataAccess.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("CYEOnlineShop.Models.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Composition")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Designer")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAvailable")
-                        .HasColumnType("bit");
-
-                    b.Property<double>("ListPrice")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<int>("SexId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Size")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("SexId");
-
-                    b.ToTable("Products");
-                });
-
             modelBuilder.Entity("CYEOnlineShop.Models.Sex", b =>
                 {
                     b.Property<int>("Id")
@@ -112,25 +61,6 @@ namespace CYEOnlineShop.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Sexes");
-                });
-
-            modelBuilder.Entity("CYEOnlineShop.Models.Product", b =>
-                {
-                    b.HasOne("CYEOnlineShop.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CYEOnlineShop.Models.Sex", "Sex")
-                        .WithMany()
-                        .HasForeignKey("SexId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-
-                    b.Navigation("Sex");
                 });
 #pragma warning restore 612, 618
         }

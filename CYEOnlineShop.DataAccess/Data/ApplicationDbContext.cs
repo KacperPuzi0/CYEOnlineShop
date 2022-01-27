@@ -13,7 +13,5 @@ namespace CYEOnlineShop.DataAccess
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<Sex> Sexes { get; set; }
-
-        public DbSet<Product> Products { get; set; }
     }
 }
