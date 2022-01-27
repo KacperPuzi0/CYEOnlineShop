@@ -10,10 +10,12 @@ namespace CYEOnlineShop.Controllers;
 public class ProductController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IWebHostEnvironment _hostEnvironment;
 
-    public ProductController(IUnitOfWork unitOfWork)
+    public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment hostEnvironment)
     {
         _unitOfWork = unitOfWork;
+        _hostEnvironment = hostEnvironment;
     }
 
     public IActionResult Index()
@@ -55,15 +57,28 @@ public class ProductController : Controller
     //POST
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Upsert(ProductViewModel obj, IFormFile file )
+    public IActionResult Upsert(ProductViewModel obj, IFormFile? file )
     {
         if (!ModelState.IsValid)
         {
             return View(obj);
         }
-        //_unitOfWork.Sex.Update(obj);
+        string wwwRootPath = _hostEnvironment.WebRootPath;
+        if (file != null)
+        {
+            string fileName = Guid.NewGuid().ToString();
+            var uploads = Path.Combine(wwwRootPath, @"Images\Products");
+            var extension = Path.GetExtension(file.FileName);
+            using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+            {
+                file.CopyTo(fileStreams);
+            }
+            obj.Product.ImageUrl = @"\Images\Products\" + fileName + extension;
+
+        }
+        _unitOfWork.Product.Add(obj.Product);
         _unitOfWork.Save();
-        TempData["success"] = "Sex updated successfully";
+        TempData["success"] = "Sex Added successfully";
         return RedirectToAction("Index");
     }
 
