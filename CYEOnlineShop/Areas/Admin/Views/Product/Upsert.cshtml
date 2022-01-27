@@ -1,8 +1,8 @@
 ﻿@model CYEOnlineShop.Models.ViewModels.ProductViewModel
 
 
-<form method="post" asp-action="Upsert">
-    <div class="border p-3 mt-4">
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+    <div class="border p-3 mt-4 row">
         <div class="row pb-2">
             <h2 class="text-primary">Edit Product</h2>
             <hr />
@@ -17,39 +17,43 @@
             <textarea asp-for="Product.Description" rows="3" class="form-control"></textarea>
             <span asp-validation-for="Product.Description" class="text-danger"></span>
         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 col-6">
             <label asp-for="Product.Composition"></label>
             <input asp-for="Product.Composition" class="form-control" />
             <span asp-validation-for="Product.Composition" class="text-danger"></span>
         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 col-6">
             <label asp-for="Product.Size"></label>
             <input asp-for="Product.Size" class="form-control" />
             <span asp-validation-for="Product.Size" class="text-danger"></span>
         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 col-6">
             <label asp-for="Product.IsAvailable"></label>
             <input asp-for="Product.IsAvailable" class="form-control" />
             <span asp-validation-for="Product.IsAvailable" class="text-danger"></span>
         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 col-6">
             <label asp-for="Product.ListPrice"></label>
             <input asp-for="Product.ListPrice" class="form-control" />
             <span asp-validation-for="Product.ListPrice" class="text-danger"></span>
         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 col-6">
             <label asp-for="Product.Price"></label>
             <input asp-for="Product.Price" class="form-control" />
             <span asp-validation-for="Product.Price" class="text-danger"></span>
         </div>
-                                <div class="mb-3">
+                                <div class="mb-3 col-6">
+            <label asp-for="Product.ImageUrl"></label>
+            <input type="file" class="form-control" />
+        </div>
+                                <div class="mb-3 col-6">
             <label asp-for="Product.CategoryId"></label>
             <select asp-for="Product.CategoryId" asp-items="@Model.CategoryList" class="form-select" >
                 <option disabled selected>-- Select Category --</option>
             </select>
             <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-3 col-6">
             <label asp-for="Product.SexId"></label>
             <select asp-for="Product.SexId" asp-items="@Model.SexList" class="form-select" >
                 <option disabled selected>-- Select Sex --</option>
@@ -57,10 +61,11 @@
             <span asp-validation-for="Product.SexId" class="text-danger"></span>
         </div>
 
-
+        <div class="col-12">
         <button type="submit" class="btn btn-primary" style="width:150px">
             Update
         </button>
         <a asp-controller="Sex" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+        </div>
     </div>
 </form>

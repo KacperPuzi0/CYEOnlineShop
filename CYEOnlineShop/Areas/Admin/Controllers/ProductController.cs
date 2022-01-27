@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CYEOnlineShop.Models;
-using CYEOnlineShop.DataAccess;
 using CYEOnlineShop.DataAccess.Repository.IRepository;
 using CYEOnlineShop.Models.ViewModels;
+using Microsoft.AspNetCore.Http;
 
 namespace CYEOnlineShop.Controllers;
 [Area("Admin")]
@@ -55,13 +55,13 @@ public class ProductController : Controller
     //POST
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Upsert(Sex obj)
+    public IActionResult Upsert(ProductViewModel obj, IFormFile file )
     {
         if (!ModelState.IsValid)
         {
             return View(obj);
         }
-        _unitOfWork.Sex.Update(obj);
+        //_unitOfWork.Sex.Update(obj);
         _unitOfWork.Save();
         TempData["success"] = "Sex updated successfully";
         return RedirectToAction("Index");
