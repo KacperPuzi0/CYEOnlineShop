@@ -11,5 +11,6 @@ namespace CYEOnlineShop.DataAccess.Repository.IRepository
     {
         void Update(Sex obj);
         
+        
     }
 }

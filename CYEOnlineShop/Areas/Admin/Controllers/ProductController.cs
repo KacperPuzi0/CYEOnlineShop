@@ -30,7 +30,7 @@ public class ProductController : Controller
     {
         ProductViewModel productViewModel = new()
         {
-            Product = new(),
+            Product  = new(),
             CategoryList = _unitOfWork.Category.GetAll().Select(i => new SelectListItem
             {
                 Text = i.Name,
@@ -51,35 +51,44 @@ public class ProductController : Controller
         else
         {
             //Update
+            productViewModel.Product = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == id);
+            return View(productViewModel);
         }
-        return View(productViewModel);
+        
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
     public IActionResult Upsert(ProductViewModel obj, IFormFile? file)
     {
-        if (!ModelState.IsValid)
+        if (ModelState.IsValid)
         {
-            return View(obj);
-        }
-        string wwwRootPath = _hostEnvironment.WebRootPath;
-        if (file != null)
-        {
-            string fileName = Guid.NewGuid().ToString();
-            var uploads = Path.Combine(wwwRootPath, @"img\prod");
-            var extension = Path.GetExtension(file.FileName);
-            using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+            string wwwRootPath = _hostEnvironment.WebRootPath;
+            if (file != null)
             {
-                file.CopyTo(fileStreams);
+                string fileName = Guid.NewGuid().ToString();
+                var uploads = Path.Combine(wwwRootPath, @"img\prod");
+                var extension = Path.GetExtension(file.FileName);
+                using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                {
+                    file.CopyTo(fileStreams);
+                }
+                obj.Product.ImageUrl = @"\img\prod\" + fileName + extension;
+                if (obj.Product.Id == 0)
+                {
+                    _unitOfWork.Product.Add(obj.Product);
+                }
+                else
+                {
+                    _unitOfWork.Product.Update(obj.Product);
+                }
             }
-            obj.Product.ImageUrl = @"\img\prod\" + fileName + extension;
-
+            _unitOfWork.Save();
+            TempData["success"] = "Product Added successfully";
+            return RedirectToAction("Index");
         }
-        _unitOfWork.Product.Add(obj.Product);
-        _unitOfWork.Save();
-        TempData["success"] = "Product Added successfully";
-        return RedirectToAction("Index");
+        return View(obj);
+
     }
 
     public IActionResult Delete(int? id)

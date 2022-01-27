@@ -14,7 +14,7 @@ namespace CYEOnlineShop.Models
         public int Id { get; set; }
 
         [Required]
-        public int Designer { get; set; }
+        public string Designer { get; set; }
 
         public string Description { get; set; }
         [Required]
@@ -23,9 +23,8 @@ namespace CYEOnlineShop.Models
         [Required]
         public string Size { get; set; }
 
-        [Display(Name = "Is Available")]
-        [Range(typeof(bool), "false", "true", ErrorMessage = "Check Available")]
-        public bool IsAvailable { get; set; }
+        [Required]
+        public string IsAvailable { get; set; }
 
         [Required]
         [Range(1,10000)]
