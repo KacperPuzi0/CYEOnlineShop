@@ -4,16 +4,19 @@ using CYEOnlineShop.Models;
 using CYEOnlineShop.DataAccess.Repository.IRepository;
 using CYEOnlineShop.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
 
 namespace CYEOnlineShop.Controllers;
 [Area("Admin")]
 public class ProductController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IWebHostEnvironment _hostEnvironment;
 
-    public ProductController(IUnitOfWork unitOfWork)
+    public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment hostEnvironment)
     {
         _unitOfWork = unitOfWork;
+        _hostEnvironment = hostEnvironment;
     }
 
     public IActionResult Index()
@@ -52,18 +55,30 @@ public class ProductController : Controller
         return View(productViewModel);
     }
 
-    //POST
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Upsert(ProductViewModel obj, IFormFile file )
+    public IActionResult Upsert(ProductViewModel obj, IFormFile? file)
     {
         if (!ModelState.IsValid)
         {
             return View(obj);
         }
-        //_unitOfWork.Sex.Update(obj);
+        string wwwRootPath = _hostEnvironment.WebRootPath;
+        if (file != null)
+        {
+            string fileName = Guid.NewGuid().ToString();
+            var uploads = Path.Combine(wwwRootPath, @"img\prod");
+            var extension = Path.GetExtension(file.FileName);
+            using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+            {
+                file.CopyTo(fileStreams);
+            }
+            obj.Product.ImageUrl = @"\img\prod\" + fileName + extension;
+
+        }
+        _unitOfWork.Product.Add(obj.Product);
         _unitOfWork.Save();
-        TempData["success"] = "Sex updated successfully";
+        TempData["success"] = "Product Added successfully";
         return RedirectToAction("Index");
     }
 
