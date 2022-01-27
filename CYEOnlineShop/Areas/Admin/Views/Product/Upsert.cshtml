@@ -1,4 +1,4 @@
-﻿@model Product
+﻿@model CYEOnlineShop.Models.ViewModels.ProductViewModel
 
 
 <form method="post" asp-action="Upsert">
@@ -8,40 +8,55 @@
             <hr />
         </div>
         <div class="mb-3">
-            <label asp-for="Designer"></label>
-            <input asp-for="Designer" class="form-control" />
-            <span asp-validation-for="Designer" class="text-danger"></span>
+            <label asp-for="Product.Designer"></label>
+            <input asp-for="Product.Designer" class="form-control" />
+            <span asp-validation-for="Product.Designer" class="text-danger"></span>
         </div>
                 <div class="mb-3">
-            <label asp-for="Description"></label>
-            <textarea asp-for="Description" rows="3" class="form-control"></textarea>
-            <span asp-validation-for="Description" class="text-danger"></span>
+            <label asp-for="Product.Description"></label>
+            <textarea asp-for="Product.Description" rows="3" class="form-control"></textarea>
+            <span asp-validation-for="Product.Description" class="text-danger"></span>
         </div>
                         <div class="mb-3">
-            <label asp-for="Composition"></label>
-            <input asp-for="Composition" class="form-control" />
-            <span asp-validation-for="Composition" class="text-danger"></span>
+            <label asp-for="Product.Composition"></label>
+            <input asp-for="Product.Composition" class="form-control" />
+            <span asp-validation-for="Product.Composition" class="text-danger"></span>
         </div>
                         <div class="mb-3">
-            <label asp-for="Size"></label>
-            <input asp-for="Size" class="form-control" />
-            <span asp-validation-for="Size" class="text-danger"></span>
+            <label asp-for="Product.Size"></label>
+            <input asp-for="Product.Size" class="form-control" />
+            <span asp-validation-for="Product.Size" class="text-danger"></span>
         </div>
                         <div class="mb-3">
-            <label asp-for="IsAvailable"></label>
-            <input asp-for="IsAvailable" class="form-control" />
-            <span asp-validation-for="IsAvailable" class="text-danger"></span>
+            <label asp-for="Product.IsAvailable"></label>
+            <input asp-for="Product.IsAvailable" class="form-control" />
+            <span asp-validation-for="Product.IsAvailable" class="text-danger"></span>
         </div>
                         <div class="mb-3">
-            <label asp-for="ListPrice"></label>
-            <input asp-for="ListPrice" class="form-control" />
-            <span asp-validation-for="ListPrice" class="text-danger"></span>
+            <label asp-for="Product.ListPrice"></label>
+            <input asp-for="Product.ListPrice" class="form-control" />
+            <span asp-validation-for="Product.ListPrice" class="text-danger"></span>
         </div>
                         <div class="mb-3">
-            <label asp-for="Price"></label>
-            <input asp-for="Price" class="form-control" />
-            <span asp-validation-for="Price" class="text-danger"></span>
+            <label asp-for="Product.Price"></label>
+            <input asp-for="Product.Price" class="form-control" />
+            <span asp-validation-for="Product.Price" class="text-danger"></span>
         </div>
+                                <div class="mb-3">
+            <label asp-for="Product.CategoryId"></label>
+            <select asp-for="Product.CategoryId" asp-items="@Model.CategoryList" class="form-select" >
+                <option disabled selected>-- Select Category --</option>
+            </select>
+            <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+        </div>
+                                        <div class="mb-3">
+            <label asp-for="Product.SexId"></label>
+            <select asp-for="Product.SexId" asp-items="@Model.SexList" class="form-select" >
+                <option disabled selected>-- Select Sex --</option>
+            </select>
+            <span asp-validation-for="Product.SexId" class="text-danger"></span>
+        </div>
+
 
         <button type="submit" class="btn btn-primary" style="width:150px">
             Update
