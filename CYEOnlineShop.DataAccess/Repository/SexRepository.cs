@@ -16,6 +16,10 @@ namespace CYEOnlineShop.DataAccess.Repository
         {
             _db = db;
         }
+        public void Add(Sex sex)
+        {
+            throw new NotImplementedException();
+        }
 
         public void Update(Sex obj)
         {

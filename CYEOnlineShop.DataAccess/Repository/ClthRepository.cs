@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace CYEOnlineShop.DataAccess.Repository
 {
-    public class ProductRepository : Repository<Product>, IProductRepository
+    public class ClthRepository : Repository<Clth>, IClthRepository
     {
         private ApplicationDbContext _db;
 
-        public ProductRepository(ApplicationDbContext db) : base(db)
+        public ClthRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }
 
-        public void Update(Product obj)
+        public void Update(Clth obj)
         {
-            var objFromDb = _db.Products.FirstOrDefault(u => u.Id == obj.Id);
+            var objFromDb = _db.Clths.FirstOrDefault(u => u.Id == obj.Id);
             if (objFromDb != null)
             {
                 objFromDb.Designer = obj.Designer;

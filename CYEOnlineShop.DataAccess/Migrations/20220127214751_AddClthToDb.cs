@@ -4,12 +4,12 @@
 
 namespace CYEOnlineShop.DataAccess.Migrations
 {
-    public partial class AddMigToDb : Migration
+    public partial class AddClthToDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "Clths",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -27,15 +27,15 @@ namespace CYEOnlineShop.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_Clths", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_Categories_CategoryId",
+                        name: "FK_Clths_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Products_Sexes_SexId",
+                        name: "FK_Clths_Sexes_SexId",
                         column: x => x.SexId,
                         principalTable: "Sexes",
                         principalColumn: "Id",
@@ -43,20 +43,20 @@ namespace CYEOnlineShop.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_CategoryId",
-                table: "Products",
+                name: "IX_Clths_CategoryId",
+                table: "Clths",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_SexId",
-                table: "Products",
+                name: "IX_Clths_SexId",
+                table: "Clths",
                 column: "SexId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Clths");
         }
     }
 }

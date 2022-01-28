@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace CYEOnlineShop.DataAccess.Repository.IRepository
 {
-    public interface IProductRepository : IRepository<Product>
+    public interface IClthRepository : IRepository<Clth>
     {
-        void Update(Product obj);
+        void Update(Clth obj);
+        
         
     }
 }

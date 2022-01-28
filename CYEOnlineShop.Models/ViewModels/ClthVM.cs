@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace CYEOnlineShop.Models.ViewModels
 {
-    public class ProductViewModel
+    public class ClthVM
     {
-        public Product Product { get; set; }
+        public Clth Clth { get; set; }
+        [ValidateNever]
         public IEnumerable<SelectListItem> CategoryList { get; set; }
+        [ValidateNever]
         public IEnumerable<SelectListItem> SexList { get; set; }
-        
 
     }
 }

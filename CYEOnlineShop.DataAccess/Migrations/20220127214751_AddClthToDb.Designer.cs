@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CYEOnlineShop.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220127135148_AddMigToDb")]
-    partial class AddMigToDb
+    [Migration("20220127214751_AddClthToDb")]
+    partial class AddClthToDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,7 +47,7 @@ namespace CYEOnlineShop.DataAccess.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("CYEOnlineShop.Models.Product", b =>
+            modelBuilder.Entity("CYEOnlineShop.Models.Clth", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -97,7 +97,7 @@ namespace CYEOnlineShop.DataAccess.Migrations
 
                     b.HasIndex("SexId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Clths");
                 });
 
             modelBuilder.Entity("CYEOnlineShop.Models.Sex", b =>
@@ -118,7 +118,7 @@ namespace CYEOnlineShop.DataAccess.Migrations
                     b.ToTable("Sexes");
                 });
 
-            modelBuilder.Entity("CYEOnlineShop.Models.Product", b =>
+            modelBuilder.Entity("CYEOnlineShop.Models.Clth", b =>
                 {
                     b.HasOne("CYEOnlineShop.Models.Category", "Category")
                         .WithMany()

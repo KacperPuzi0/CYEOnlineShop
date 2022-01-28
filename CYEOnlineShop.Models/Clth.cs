@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CYEOnlineShop.Models
 {
-    public class Product
+    public class Clth
     {
         public int Id { get; set; }
 
@@ -27,11 +27,11 @@ namespace CYEOnlineShop.Models
         public string IsAvailable { get; set; }
 
         [Required]
-        [Range(1,10000)]
+        [Range(1, 10000)]
         public double ListPrice { get; set; }
 
         [Required]
-        [Range(1,10000)]
+        [Range(1, 10000)]
         public double Price { get; set; }
         public string ImageUrl { get; set; }
 
@@ -43,7 +43,9 @@ namespace CYEOnlineShop.Models
 
         [Required]
         public int SexId { get; set; }
+        [ForeignKey("SexId")]
         [ValidateNever]
         public Sex Sex { get; set; }
     }
 }
+

@@ -1,0 +1,93 @@
+﻿@model CYEOnlineShop.Models.ViewModels.ClthVM
+
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">@(Model.Clth.Id!=0?"Update": "Create") Clth</h2>
+            <hr />
+        </div>
+       <div class="mb-3">
+            <label asp-for="Clth.Designer"></label>
+            <input asp-for="Clth.Designer" class="form-control" />
+            <span asp-validation-for="Clth.Designer" class="text-danger"></span>
+        </div>
+                <div class="mb-3">
+            <label asp-for="Clth.Description"></label>
+            <textarea asp-for="Clth.Description" rows="3" class="form-control"></textarea>
+            <span asp-validation-for="Clth.Description" class="text-danger"></span>
+        </div>
+                        <div class="mb-3 col-5">
+            <label asp-for="Clth.Composition"></label>
+            <input asp-for="Clth.Composition" class="form-control" />
+            <span asp-validation-for="Clth.Composition" class="text-danger"></span>
+        </div>
+                        <div class="mb-3 col-5">
+            <label asp-for="Clth.Size"></label>
+            <input asp-for="Clth.Size" class="form-control" />
+            <span asp-validation-for="Clth.Size" class="text-danger"></span>
+        </div>
+                        <div class="mb-3 col-5">
+            <label asp-for="Clth.IsAvailable"></label>
+            <input asp-for="Clth.IsAvailable" class="form-control" />
+            <span asp-validation-for="Clth.IsAvailable" class="text-danger"></span>
+        </div>
+                        <div class="mb-3 col-5">
+            <label asp-for="Clth.ListPrice"></label>
+            <input asp-for="Clth.ListPrice" class="form-control" />
+            <span asp-validation-for="Clth.ListPrice" class="text-danger"></span>
+        </div>
+                        <div class="mb-3 col-5">
+            <label asp-for="Clth.Price"></label>
+            <input asp-for="Clth.Price" class="form-control" />
+            <span asp-validation-for="Clth.Price" class="text-danger"></span>
+        </div>
+                                <div class="mb-3 col-5">
+            <label asp-for="Clth.ImageUrl"></label>
+            <input type="file" id="uploadBoxy" class="form-control" />
+        </div>
+                                <div class="mb-3 col-5">
+            <label asp-for="Clth.CategoryId"></label>
+            <select asp-for="Clth.CategoryId" asp-items="@Model.CategoryList" class="form-select" >
+                <option disabled selected>--Select Category--</option>
+            </select>
+            <span asp-validation-for="Clth.CategoryId" class="text-danger"></span>
+        </div>
+                                        <div class="mb-3 col-5">
+            <label asp-for="Clth.SexId"></label>
+            <select asp-for="Clth.SexId" asp-items="@Model.SexList" class="form-select" >
+                <option disabled selected>--Select Sex--</option>
+            </select>
+            <span asp-validation-for="Clth.SexId" class="text-danger"></span>
+        </div>
+        <div class="col-12">
+        @if(Model.Clth.Id!=0)
+        {
+              <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+        }
+        else{
+            <button type="submit" oneclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>
+        }
+
+        <a asp-controller="Sex" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+    <script>
+        function ValidateInput(){
+            if(document.getElementById("uploadBoxy").value==""){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please upload an Image',
+                    });
+                    return false;
+            }
+            return true;
+        }
+    </script>
+}

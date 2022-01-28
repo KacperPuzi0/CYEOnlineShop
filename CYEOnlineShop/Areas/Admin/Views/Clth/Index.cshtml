@@ -2,11 +2,11 @@
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="text-primary">Product List</h2>
+            <h2 class="text-primary">Clth List</h2>
         </div>
         <div class="col-6 text-end">
-            <a asp-controller="Product" asp-action="Upsert" class="btn btn-primary">
-              <i class="bi bi-plus-circle"></i> &nbsp; Create New Product
+            <a asp-controller="Clth" asp-action="Upsert" class="btn btn-primary">
+              <i class="bi bi-plus-circle"></i> &nbsp; Create New Clth
             </a>
         </div>
     </div>
@@ -20,10 +20,16 @@
             <th>Composition</th>
             <th>Size</th>
             <th>IsAvailable</th>
+            <th>ListPrice</th>
             <th>Price</th>
-            <th>Category</th>
+            <th>ImageUrl</th>
             <th></th>
         </tr>
     </thead>
 </table>
 </div>
+
+
+@section Scripts{
+    <script src="~/js/clth.js"></script>
+}
