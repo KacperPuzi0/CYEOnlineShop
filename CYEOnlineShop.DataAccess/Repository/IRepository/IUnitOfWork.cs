@@ -11,6 +11,7 @@ namespace CYEOnlineShop.DataAccess.Repository.IRepository
         ICategoryRepository Category { get; }
         ISexRepository Sex { get; }
         IClthRepository Clth { get; }
+        ICompanyRepository Company { get; }
         void Save();
     }
 }

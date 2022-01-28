@@ -18,11 +18,14 @@ namespace CYEOnlineShop.DataAccess.Repository
             Category = new CategoryRepository(_db);
             Sex = new SexRepository(_db);
             Clth = new ClthRepository(_db);
+            Company = new CompanyRepository(_db);   
         }
         public ICategoryRepository Category { get; private set; }
 
         public ISexRepository Sex {get; private set; }
         public IClthRepository Clth { get; private set; }
+
+        public ICompanyRepository Company { get; private set; }
         public void Save()
         {
             _db.SaveChanges();

@@ -17,5 +17,9 @@ namespace CYEOnlineShop.DataAccess
         public DbSet<Sex> Sexes { get; set; }
 
         public DbSet<Clth> Clths { get; set; }
+
+        public DbSet<ApplicationUser> ApplicatApplicationUser { get; set; }
+
+        public DbSet<Company> Companies { get; set; }
     }
 }
