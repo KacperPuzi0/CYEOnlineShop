@@ -17,7 +17,7 @@ namespace CYEOnlineShop.DataAccess.Repository
         public Repository(ApplicationDbContext db)
         {
             _db = db;
-            //_db.Dish.Include(u => u.Category).Include(u=>u.LevelType);
+            _db.Clths.Include(x => x.Category).Include(x => x.Sex);
             this.dbSet = _db.Set<T>();
         }
         public void Add(T entity)
@@ -30,7 +30,7 @@ namespace CYEOnlineShop.DataAccess.Repository
             IQueryable<T> query = dbSet;
             if (includeProperties != null)
             {
-                foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (var includeProp in includeProperties.Split(new char[] { ','}, StringSplitOptions.RemoveEmptyEntries))
                 {
                     query = query.Include(includeProp);
                 }

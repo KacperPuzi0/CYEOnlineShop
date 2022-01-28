@@ -31,10 +31,7 @@ namespace CYEOnlineShop.DataAccess.Repository
                 objFromDb.Price = obj.Price;
                 objFromDb.CategoryId = obj.CategoryId;
                 objFromDb.SexId = obj.SexId;
-                if (obj.ImageUrl != null)
-                {
-                    objFromDb.ImageUrl = obj.ImageUrl;
-                }
+
             }
         }
     }

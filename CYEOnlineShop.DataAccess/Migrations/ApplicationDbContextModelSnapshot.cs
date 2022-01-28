@@ -68,10 +68,6 @@ namespace CYEOnlineShop.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("IsAvailable")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

@@ -4,7 +4,7 @@
 
 namespace CYEOnlineShop.DataAccess.Migrations
 {
-    public partial class AddClthToDb : Migration
+    public partial class AddDbClthTODb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,7 +21,6 @@ namespace CYEOnlineShop.DataAccess.Migrations
                     IsAvailable = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ListPrice = table.Column<double>(type: "float", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     SexId = table.Column<int>(type: "int", nullable: false)
                 },

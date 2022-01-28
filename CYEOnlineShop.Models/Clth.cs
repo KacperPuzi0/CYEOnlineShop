@@ -28,6 +28,7 @@ namespace CYEOnlineShop.Models
 
         [Required]
         [Range(1, 10000)]
+        [Display(Name = "List Price")]
         public double ListPrice { get; set; }
 
         [Required]
@@ -35,15 +36,16 @@ namespace CYEOnlineShop.Models
         public double Price { get; set; }
 
         [Required]
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
-        [ValidateNever]
+
         public Category Category { get; set; }
 
         [Required]
+        [Display(Name = "Sex")]
         public int SexId { get; set; }
         [ForeignKey("SexId")]
-        [ValidateNever]
         public Sex Sex { get; set; }
     }
 }

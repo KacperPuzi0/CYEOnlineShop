@@ -28,8 +28,4 @@
     <ProjectReference Include="..\CYEOnlineShop.DataAccess\CYEOnlineShop.DataAccess.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\img\prod\" />
-  </ItemGroup>
-
 </Project>

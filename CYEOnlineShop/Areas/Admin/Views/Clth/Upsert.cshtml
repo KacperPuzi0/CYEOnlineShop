@@ -36,15 +36,15 @@
             <input asp-for="Clth.ListPrice" class="form-control" />
             <span asp-validation-for="Clth.ListPrice" class="text-danger"></span>
         </div>
-                        <div class="mb-3 col-5">
+                        <div class="mb-3 col-5" >
             <label asp-for="Clth.Price"></label>
             <input asp-for="Clth.Price" class="form-control" />
             <span asp-validation-for="Clth.Price" class="text-danger"></span>
         </div>
-                                <div class="mb-3 col-5">
+@*                                <div class="mb-3 col-5">
             <label asp-for="Clth.ImageUrl"></label>
             <input type="file" id="uploadBoxy" class="form-control" />
-        </div>
+        </div>*@
                                 <div class="mb-3 col-5">
             <label asp-for="Clth.CategoryId"></label>
             <select asp-for="Clth.CategoryId" asp-items="@Model.CategoryList" class="form-select" >

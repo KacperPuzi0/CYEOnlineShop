@@ -51,7 +51,7 @@ public class ClthController : Controller
         }
         else
         {
-            //clthVM.Clth = _unitOfWork.Clth.GetFirstOrDefault(u => u.Id == id);
+            clthVM.Clth = _unitOfWork.Clth.GetFirstOrDefault(u => u.Id == id);
             return View(clthVM);
         }
         
@@ -62,19 +62,19 @@ public class ClthController : Controller
     public IActionResult Upsert(ClthVM obj, IFormFile? file)
     {
 
-            string wwwRootPath = _hostEnvironment.WebRootPath;
-            if (file != null)
-            {
-                string fileName = Guid.NewGuid().ToString();
-                var uploads = Path.Combine(wwwRootPath, @"img\prod");
-                var extension = Path.GetExtension(file.FileName);
+            //string wwwRootPath = _hostEnvironment.WebRootPath;
+            //if (file != null)
+            //{
+            //    string fileName = Guid.NewGuid().ToString();
+            //    var uploads = Path.Combine(wwwRootPath, @"img\prod");
+            //    var extension = Path.GetExtension(file.FileName);
 
-                using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
-                {
-                    file.CopyTo(fileStreams);
-                }
-                obj.Clth.ImageUrl = @"\img\prod" + file.FileName + extension;
-            }
+            //    using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+            //    {
+            //        file.CopyTo(fileStreams);
+            //    }
+            //    obj.Clth.ImageUrl = @"\img\prod" + file.FileName + extension;
+            //}
             if (obj.Clth.Id == 0)
             {
                 _unitOfWork.Clth.Add(obj.Clth);
@@ -87,7 +87,7 @@ public class ClthController : Controller
             _unitOfWork.Save();
             TempData["success"] = "Clth added successfully";
             return RedirectToAction("Index");
-        return View(obj);
+            return View(obj);
 
     }
 
@@ -125,4 +125,12 @@ public class ClthController : Controller
     //    return RedirectToAction("Index");
     //}
 
+    #region API CALlS
+    [HttpGet]
+    public IActionResult GetAll()
+    {
+        var clthList = _unitOfWork.Clth.GetAll(includeProperties:"Category,Sex");
+        return Json(new { data = clthList });
+    }
+    #endregion
 }
