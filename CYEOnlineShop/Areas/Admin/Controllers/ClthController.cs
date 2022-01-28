@@ -12,12 +12,12 @@ namespace CYEOnlineShop.Controllers;
 public class ClthController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IWebHostEnvironment _hostEnvironment;
+    //private readonly IWebHostEnvironment _hostEnvironment;
 
-    public ClthController(IUnitOfWork unitOfWork, IWebHostEnvironment hostEnvironment)
+    public ClthController(IUnitOfWork unitOfWork/*IWebHostEnvironment hostEnvironment*/)
     {
         _unitOfWork = unitOfWork;
-        _hostEnvironment = hostEnvironment;
+        //_hostEnvironment = hostEnvironment;
     }
 
     public IActionResult Index()
@@ -62,6 +62,20 @@ public class ClthController : Controller
     public IActionResult Upsert(ClthVM obj, IFormFile? file)
     {
 
+            if (obj.Clth.Id == 0)
+            {
+                _unitOfWork.Clth.Add(obj.Clth);
+            }
+            else
+            {
+                _unitOfWork.Clth.Update(obj.Clth);
+            }
+
+            _unitOfWork.Save();
+            TempData["success"] = "Clth added successfully";
+            return RedirectToAction("Index");
+
+
             //string wwwRootPath = _hostEnvironment.WebRootPath;
             //if (file != null)
             //{
@@ -75,19 +89,8 @@ public class ClthController : Controller
             //    }
             //    obj.Clth.ImageUrl = @"\img\prod" + file.FileName + extension;
             //}
-            if (obj.Clth.Id == 0)
-            {
-                _unitOfWork.Clth.Add(obj.Clth);
-            }
-            else
-            {
-                _unitOfWork.Clth.Update(obj.Clth);
-            }
 
-            _unitOfWork.Save();
-            TempData["success"] = "Clth added successfully";
-            return RedirectToAction("Index");
-            return View(obj);
+            //return View(obj);
 
     }
 
@@ -131,6 +134,20 @@ public class ClthController : Controller
     {
         var clthList = _unitOfWork.Clth.GetAll(includeProperties:"Category,Sex");
         return Json(new { data = clthList });
+    }
+
+    //POST
+    [HttpDelete]
+    public IActionResult Delete(int? id)
+    {
+        var obj = _unitOfWork.Clth.GetFirstOrDefault(u => u.Id == id);
+        if (obj == null)
+        {
+            return Json(new { success = false, message = "Error while deleting" });
+        }
+        _unitOfWork.Clth.Remove(obj);
+        _unitOfWork.Save();
+        return Json(new { success = true, message = "Delete Successful" });
     }
     #endregion
 }
