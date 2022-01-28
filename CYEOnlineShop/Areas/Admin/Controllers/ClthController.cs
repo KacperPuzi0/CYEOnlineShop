@@ -51,18 +51,17 @@ public class ClthController : Controller
         }
         else
         {
-            clthVM.Clth = _unitOfWork.Clth.GetFirstOrDefault(u => u.Id == id);
+            //clthVM.Clth = _unitOfWork.Clth.GetFirstOrDefault(u => u.Id == id);
             return View(clthVM);
         }
-
+        
     }
     //POST
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Upsert(ClthVM obj, IFormFile file)
+    public IActionResult Upsert(ClthVM obj, IFormFile? file)
     {
-        if (ModelState.IsValid)
-        {
+
             string wwwRootPath = _hostEnvironment.WebRootPath;
             if (file != null)
             {
@@ -88,7 +87,6 @@ public class ClthController : Controller
             _unitOfWork.Save();
             TempData["success"] = "Clth added successfully";
             return RedirectToAction("Index");
-        }
         return View(obj);
 
     }
